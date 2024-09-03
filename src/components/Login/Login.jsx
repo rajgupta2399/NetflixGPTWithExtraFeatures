@@ -7,7 +7,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../Utils/Firebase";
-
+import { updateProfile } from "firebase/auth";
 const Login = () => {
   const navigate = useNavigate();
   const [isSignUpForm, setIsSignUpForm] = useState(true);
@@ -15,7 +15,7 @@ const Login = () => {
   const toggleSignUpNow = () => {
     setIsSignUpForm(!isSignUpForm);
   };
-  // const name = useRef(null);
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
@@ -33,7 +33,17 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          navigate("/about");
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/146910995?v=4",
+          })
+            .then(() => {
+              navigate("/about");
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+            });
+
           console.log(user);
         })
         .catch((error) => {
@@ -85,6 +95,7 @@ const Login = () => {
           {!isSignUpForm && (
             <input
               type="text"
+              ref={name}
               placeholder="Full Name"
               className="p-3 my-3 w-full rounded-sm bg-gray-700 text-white"
             />

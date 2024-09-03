@@ -24,7 +24,6 @@ export default function Profile() {
         navigate("/");
       })
       .catch((error) => {
-        //...
         navigate("/error");
       });
   };
