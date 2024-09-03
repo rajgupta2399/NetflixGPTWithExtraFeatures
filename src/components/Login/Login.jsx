@@ -8,8 +8,11 @@ import {
 } from "firebase/auth";
 import { auth } from "../Utils/Firebase";
 import { updateProfile } from "firebase/auth";
+import { addUser } from "@/store/userSlice";
+import { useDispatch } from "react-redux";
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isSignUpForm, setIsSignUpForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const toggleSignUpNow = () => {
@@ -38,6 +41,15 @@ const Login = () => {
             photoURL: "https://avatars.githubusercontent.com/u/146910995?v=4",
           })
             .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
               navigate("/about");
             })
             .catch((error) => {
