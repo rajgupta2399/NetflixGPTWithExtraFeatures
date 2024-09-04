@@ -39,7 +39,7 @@ export default function Headers() {
   return (
     <>
       <header
-        className="bg-transparent font-Poppins font-sans h-[80px] shadow-[0_0px_20px_30px_-10px_rgb(38, 57, 77)] w-full"
+        className="bg-transparent font-Poppins font-sans h-[80px] shadow-[0_0px_20px_30px_-10px_rgb(38, 57, 77)] w-full absolute z-50"
         style={styleCard}
       >
         <nav
@@ -109,7 +109,7 @@ export default function Headers() {
               Search
             </Link>
           </Popover.Group>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end bg-transparent blur-0">
             <Profile />
           </div>
         </nav>

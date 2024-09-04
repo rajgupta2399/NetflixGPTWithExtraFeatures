@@ -13,6 +13,7 @@ import TvShows from "../TvShows/TvShows";
 import Wishlist from "../Wishlist/Wishlist";
 import Browse from "../Browse/Browse";
 import Search from "../Search/Search";
+import Layout from "@/Layout";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -46,27 +47,37 @@ export const appRouter = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/browse",
-    element: <Browse />,
-  },
-  {
-    path: "/Movies",
-    element: <Movies />,
-  },
-  {
-    path: "/TvShows",
-    element: <TvShows />,
-  },
-  {
-    path: "/Wishlist",
-    element: <Wishlist />,
-  },
-  {
-    path: "/Search",
-    element: <Search />,
-  },
-  {
-    path: "/error",
-    element: <ErrorPage />,
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "browse",
+        element: <Browse />,
+      },
+      {
+        path: "Movies",
+        element: <Movies />,
+      },
+      {
+        path: "TvShows",
+        element: <TvShows />,
+      },
+      {
+        path: "Wishlist",
+        element: <Wishlist />,
+      },
+      {
+        path: "Search",
+        element: <Search />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "error",
+        element: <ErrorPage />,
+      },
+    ],
   },
 ]);
