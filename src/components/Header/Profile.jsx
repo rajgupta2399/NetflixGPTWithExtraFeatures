@@ -28,7 +28,7 @@ export default function Profile() {
   };
 
   return (
-    <Navbar isBordered>
+    <Navbar css={{ borderBottom: "none" }}>
       <NavbarContent as="div" className="items-center" justify="end">
         {user?.displayName ? (
           <Dropdown placement="bottom-end">

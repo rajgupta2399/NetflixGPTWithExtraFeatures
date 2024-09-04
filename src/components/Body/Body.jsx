@@ -7,7 +7,6 @@ import { addUser, removeUser } from "@/store/userSlice";
 import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
-import Contact from "../Contact/Contact";
 import ErrorPage from "../ErrorP/ErrorPage";
 
 const Body = () => {
@@ -44,10 +43,6 @@ export const appRouter = createBrowserRouter([
   {
     path: "/about",
     element: <About />,
-  },
-  {
-    path: "/contact",
-    element: <Contact />,
   },
   {
     path: "/error",

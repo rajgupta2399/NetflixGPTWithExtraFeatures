@@ -93,7 +93,7 @@ module.exports = {
         dark: {
           layout: {}, // dark theme layout tokens
           colors: {
-            background:"#1D232A",
+            background:"#000",
             foreground:"#ffffff"
           }, // dark theme colors
         },
