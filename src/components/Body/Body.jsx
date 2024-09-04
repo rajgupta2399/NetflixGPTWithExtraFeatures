@@ -8,6 +8,11 @@ import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import ErrorPage from "../ErrorP/ErrorPage";
+import Movies from "../Movies/Movies";
+import TvShows from "../TvShows/TvShows";
+import Wishlist from "../Wishlist/Wishlist";
+import Browse from "../Browse/Browse";
+import Search from "../Search/Search";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -41,8 +46,24 @@ export const appRouter = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/about",
-    element: <About />,
+    path: "/browse",
+    element: <Browse />,
+  },
+  {
+    path: "/Movies",
+    element: <Movies />,
+  },
+  {
+    path: "/TvShows",
+    element: <TvShows />,
+  },
+  {
+    path: "/Wishlist",
+    element: <Wishlist />,
+  },
+  {
+    path: "/Search",
+    element: <Search />,
   },
   {
     path: "/error",

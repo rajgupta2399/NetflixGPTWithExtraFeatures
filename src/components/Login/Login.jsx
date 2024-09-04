@@ -50,7 +50,7 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/about");
+              navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -73,7 +73,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          navigate("/about");
+          navigate("/browse");
 
           console.log(user);
         })
