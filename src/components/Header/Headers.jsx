@@ -2,14 +2,15 @@ import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-
-// import MoonIcon from "../Icons/MoonIcon.jsx";
-// import SunIcon from "../Icons/SunIcon.jsx";
 import { useTheme } from "next-themes";
 import Profile from "./Profile.jsx";
 import { signOut } from "firebase/auth";
 import { auth } from "../Utils/Firebase";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { addUser, removeUser } from "@/store/userSlice";
+import { useDispatch } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
 import NETFLIXLOGO from "../../assets/NGPT LOGOS.png";
 
 function classNames(...classes) {
@@ -18,18 +19,39 @@ function classNames(...classes) {
 
 export default function Headers() {
   // const { resolvedTheme, theme, setTheme } = useTheme();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {
-        navigate("/");
-      })
+      .then(() => {})
       .catch((error) => {
         navigate("/error");
       });
   };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName, photoURL } = user.uid;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+        navigate("/browse");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   const styleCard = {
     fontFamily: "Poppins",
     backgroundColor: "transparent", // Set to transparent
@@ -39,7 +61,7 @@ export default function Headers() {
   return (
     <>
       <header
-        className="bg-transparent font-Poppins font-sans h-[80px] shadow-[0_0px_20px_30px_-10px_rgb(38, 57, 77)] w-full absolute z-50"
+        className="bg-transparent font-Poppins font-sans h-[80px] shadow-[0_0px_20px_30px_-10px_rgb(38, 57, 77)] w-full absolute z-50 "
         style={styleCard}
       >
         <nav
@@ -144,7 +166,10 @@ export default function Headers() {
                     {({ open }) => (
                       <>
                         <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-white hover:bg-gray-50  ">
-                          <Link to="/browse" onClick={() => setMobileMenuOpen(false)}>
+                          <Link
+                            to="/browse"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
                             Home
                           </Link>
                         </Disclosure.Button>

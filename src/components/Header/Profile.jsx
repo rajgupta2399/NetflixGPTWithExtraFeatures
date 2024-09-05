@@ -12,6 +12,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../Utils/Firebase";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { USER_AVATAR } from "../Utils/Constant";
 
 export default function Profile() {
   const user = useSelector((store) => store.user);
@@ -29,7 +30,11 @@ export default function Profile() {
 
   return (
     <Navbar css={{ borderBottom: "none" }}>
-      <NavbarContent as="div" className="items-center bg-transparent" justify="end">
+      <NavbarContent
+        as="div"
+        className="items-center bg-transparent"
+        justify="end"
+      >
         {user?.displayName ? (
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
@@ -62,8 +67,8 @@ export default function Profile() {
                 as="button"
                 className="transition-transform"
                 color="primary"
-                size="sm"
-                src="https://avatars.githubusercontent.com/u/12824231?v=4"
+                size="md"
+                src={USER_AVATAR}
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
