@@ -13,6 +13,7 @@ import Wishlist from "../Wishlist/Wishlist";
 import Browse from "../Browse/Browse";
 import Search from "../Search/Search";
 import Layout from "@/Layout";
+import MoviesDetails from "../Movies/MoviesDetails";
 
 const Body = () => {
   return <RouterProvider router={appRouter} />;
@@ -36,6 +37,10 @@ export const appRouter = createBrowserRouter([
       {
         path: "Movies",
         element: <Movies />,
+      },
+      {
+        path: "MovieDetail/:movieId",
+        element: <MoviesDetails />,
       },
       {
         path: "TvShows",
