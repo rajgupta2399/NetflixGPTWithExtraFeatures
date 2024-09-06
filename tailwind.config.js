@@ -104,7 +104,8 @@ module.exports = {
             foreground: "#F7B750",
             focus: "#F182F6",
           },
-        }
+        },
+        
         // ... custom themes
       },
     }),
