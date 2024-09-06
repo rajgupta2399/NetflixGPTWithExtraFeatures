@@ -1,6 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Wishlist = () => {
+  const movies = useSelector((store)=>store.watchLater.item)
+  console.log(movies);
+  
   return (
     <div className="relative">
       <img

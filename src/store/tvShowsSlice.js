@@ -5,8 +5,6 @@ const tvShowSlice = createSlice({
   initialState: {
     arrivingToday: null,
     onTheAir: null,
-    popular: null,
-    topRated: null,
   },
   reducers: {
     addArrivingToday: (state, action) => {
@@ -14,12 +12,6 @@ const tvShowSlice = createSlice({
     },
     addOnTheAir: (state, action) => {
       state.onTheAir = action.payload;
-    },
-    addPopular: (state, action) => {
-      state.popular = action.payload;
-    },
-    addTopRated: (state, action) => {
-      state.topRated = action.payload;
     },
   },
 });

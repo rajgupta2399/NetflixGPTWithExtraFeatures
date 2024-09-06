@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { imageBaseURL, IMG_CDN_URL } from "../Utils/Constant";
+import { useDispatch } from "react-redux";
+import { addWatchToLater } from "@/store/watchLaterSlice";
 
 const MoviesDetails = () => {
+  const dispatch = useDispatch();
   const { movieId } = useParams();
   const [movieDetail, setMovieDetail] = useState(null);
 
@@ -32,7 +35,6 @@ const MoviesDetails = () => {
     release_date,
     runtime,
     vote_average,
-    genres,
     overview,
     videos,
   } = movieDetail;
@@ -41,6 +43,10 @@ const MoviesDetails = () => {
     (video) => video.type === "Trailer"
   );
   const trailer = filterTrailer.length ? filterTrailer[0] : json.results[0];
+
+  const handleToWatchLater = () => {
+    dispatch(addWatchToLater(movieDetail));
+  };
 
   return (
     <div className="relative">
@@ -54,13 +60,23 @@ const MoviesDetails = () => {
 
       <div className="px-20 py-24 relative z-10">
         <div className="flex flex-col gap-8 sm:flex-row">
-          <figure className="">
-            <img
-              src={`${IMG_CDN_URL}${poster_path}`}
-              alt={original_title}
-              className="w-[300px] rounded-xl object-cover"
-            />
-          </figure>
+          <div className="flex flex-col">
+            <figure className="">
+              <img
+                src={`${IMG_CDN_URL}${poster_path}`}
+                alt={original_title}
+                className="w-[300px] rounded-xl object-cover"
+              />
+            </figure>
+            <div className=" flex justify-center align-middle py-5">
+              <button
+                className=" border-2 border-red-600 py-3 px-10 rounded-xl bg-red-600 font-semibold"
+                onClick={handleToWatchLater}
+              >
+                Add To WatchList
+              </button>
+            </div>
+          </div>
 
           <div className="detail-box bg-gradient-to-t after:from-[hsla(250,13%,11%,1)] after:to-[hsla(255,14%,11%,0.844)] ">
             <div className="detail-content flex flex-col">
