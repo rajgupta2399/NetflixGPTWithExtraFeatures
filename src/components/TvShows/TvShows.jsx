@@ -1,14 +1,22 @@
+import useArrivingToday from "@/Hooks/useArrivingToday";
 import React from "react";
+import { useSelector } from "react-redux";
+import ShowsList from "./showsList";
+import useOnTheAir from "@/Hooks/useOnTheAir";
 
 const TvShows = () => {
+  useArrivingToday();
+  useOnTheAir();
+  const shows = useSelector((store) => store.shows);
   return (
-    <div className="relative">
-      <img
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/20bf1f4d-1c73-48fd-8689-310d6dd80efc/81bdc063-cb8f-4afe-8a02-a3131ca4ef5e/IN-en-20240812-POP_SIGNUP_TWO_WEEKS-perspective_WEB_7998f3b6-63e3-424a-8328-550cf777ddce_large.jpg"
-        alt="background-image"
-        className="w-full h-[100vh] object-cover filter brightness-50"
-      />
-    </div>
+    shows.arrivingToday && (
+      <div className="bg-black relative">
+        <div className=" mt-[90px] pl-4 md:pl-12z-20 absolute">
+          <ShowsList title={"Arriving Today"} movies={shows.arrivingToday} />
+          <ShowsList title={"On The Air"} movies={shows.onTheAir} />
+        </div>
+      </div>
+    )
   );
 };
 
