@@ -109,13 +109,6 @@ export default function Headers() {
               TV Shows
             </Link>
             <Link
-              to="/Movies"
-              className="text-sm font-semibold leading-6 text-white hover:text-red-600 transition ease-in delay-100 cursor-pointer"
-              style={styleCard}
-            >
-              Movies
-            </Link>
-            <Link
               to="/Wishlist"
               className="text-sm font-semibold leading-6 text-white hover:text-red-600 transition ease-in delay-100 cursor-pointer"
               style={styleCard}

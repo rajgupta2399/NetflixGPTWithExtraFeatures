@@ -1,17 +1,23 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { IMG_CDN_URL } from "../Utils/Constant";
 
 const Wishlist = () => {
-  const movies = useSelector((store)=>store.watchLater.item)
-  console.log(movies);
-  
+  const movies = useSelector((store) => store.watchLater.item);
+
   return (
-    <div className="relative">
-      <img
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/20bf1f4d-1c73-48fd-8689-310d6dd80efc/81bdc063-cb8f-4afe-8a02-a3131ca4ef5e/IN-en-20240812-POP_SIGNUP_TWO_WEEKS-perspective_WEB_7998f3b6-63e3-424a-8328-550cf777ddce_large.jpg"
-        alt="background-image"
-        className="w-full h-[100vh] object-cover filter brightness-50"
-      />
+    <div className=" relative">
+      <div className="py-20 px-20 flex gap-8 flex-wrap flex-row justify-center mb-5 absolute mt-10">
+        {movies.map((item, index) => (
+          <div className="w-36 md:w-56 pr-4" key={item.id}>
+            <img
+              alt="Movie Card"
+              className=" rounded-md"
+              src={IMG_CDN_URL + item.poster_path}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

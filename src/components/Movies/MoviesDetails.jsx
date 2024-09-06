@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { imageBaseURL, IMG_CDN_URL } from "../Utils/Constant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addWatchToLater } from "@/store/watchLaterSlice";
+import toast from "react-hot-toast";
 
 const MoviesDetails = () => {
   const dispatch = useDispatch();
   const { movieId } = useParams();
   const [movieDetail, setMovieDetail] = useState(null);
 
+  const watchLaterMovies = useSelector((store) => store.watchLater.item);
+  const getInfoFromLocalStorage = useSelector((store) => store.watchLater.item);
+  console.log(getInfoFromLocalStorage);
   const fetchDetail = async () => {
     try {
       const data = await fetch(
@@ -20,11 +24,10 @@ const MoviesDetails = () => {
       console.error("Failed to fetch movie details:", error);
     }
   };
-  console.log(movieDetail);
 
   useEffect(() => {
     fetchDetail();
-  }, []);
+  }, [movieId]);
 
   if (!movieDetail) return <p>Loading...</p>;
 
@@ -44,10 +47,22 @@ const MoviesDetails = () => {
   );
   const trailer = filterTrailer.length ? filterTrailer[0] : json.results[0];
 
-  const handleToWatchLater = () => {
-    dispatch(addWatchToLater(movieDetail));
-  };
+  // 
+  
 
+  const handleToWatchLater = () => {
+    const isAlreadyInWatchlist = watchLaterMovies.some(
+      (movie) => movie.id === movieDetail.id
+    );
+
+    if (!isAlreadyInWatchlist) {
+      dispatch(addWatchToLater(movieDetail));
+      toast.success("Movie Added To WatchLater")
+    } else {
+      console.log("Movie is already in the watchlist");
+      toast.error("Movie Already Added")
+    }
+  };
   return (
     <div className="relative">
       <div className="absolute top-0 left-0 w-full h-[790px] bg-cover bg-center bg-no-repeat z-[-1] after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:from-[hsla(250,13%,11%,1)] after:to-[hsla(255,14%,11%,0.844)]">

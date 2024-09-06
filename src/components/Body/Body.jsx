@@ -7,7 +7,6 @@ import {
 import Login from "../Login/Login";
 import About from "../About/About";
 import ErrorPage from "../ErrorP/ErrorPage";
-import Movies from "../Movies/Movies";
 import TvShows from "../TvShows/TvShows";
 import Wishlist from "../Wishlist/Wishlist";
 import Browse from "../Browse/Browse";
@@ -33,10 +32,6 @@ export const appRouter = createBrowserRouter([
       {
         path: "browse",
         element: <Browse />,
-      },
-      {
-        path: "Movies",
-        element: <Movies />,
       },
       {
         path: "MovieDetail/:movieId",
