@@ -96,7 +96,7 @@ const Login = () => {
       </div>
       <div className="absolute inset-0 flex items-center justify-center flex-col">
         <form
-          className=" bg-[rgba(0,0,0,0.7)] p-12 rounded-lg z-10 flex flex-col items-center w-[30%]"
+          className=" bg-[rgba(0,0,0,0.7)] p-12 rounded-lg z-10 flex flex-col items-center w-[90%] sm:w-[30%] md:w-[50%] lg:w-[30%] mt-20"
           onSubmit={(e) => e.preventDefault()}
         >
           <header>
