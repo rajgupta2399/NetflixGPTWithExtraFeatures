@@ -113,7 +113,7 @@ export default function Headers() {
               className="text-sm font-semibold leading-6 text-white hover:text-red-600 transition ease-in delay-100 cursor-pointer"
               style={styleCard}
             >
-              My Wishlist
+              WatchLater
             </Link>
             <Link
               to="/Search"
@@ -193,7 +193,7 @@ export default function Headers() {
                     style={styleCard}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    My Wishlist
+                    WatchLater
                   </Link>
                 </div>
 

@@ -85,7 +85,7 @@ const MoviesDetails = () => {
             </figure>
             <div className=" flex justify-center align-middle py-5">
               <button
-                className=" border-2 border-red-600 py-3 px-10 rounded-xl bg-red-600 font-semibold"
+                className=" border-2 border-green-600 py-3 px-10 rounded-xl bg-green-600 font-semibold"
                 onClick={handleToWatchLater}
               >
                 Add To WatchList

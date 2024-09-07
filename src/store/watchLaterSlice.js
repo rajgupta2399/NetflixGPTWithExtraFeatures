@@ -20,9 +20,13 @@ const watchLater = createSlice({
         localStorage.setItem("watchLaterData", JSON.stringify(state.item));
       }
     },
+    removeWatchLater: (state, action) => {
+      state.item = state.item.filter((movie) => movie.id !== action.payload);
+      localStorage.setItem("watchLaterData", JSON.stringify(state.item));
+    },
   },
 });
 
-export const { addWatchToLater } = watchLater.actions;
+export const { addWatchToLater, removeWatchLater } = watchLater.actions;
 
 export default watchLater.reducer;
