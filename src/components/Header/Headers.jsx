@@ -61,11 +61,11 @@ export default function Headers() {
   return (
     <>
       <header
-        className="bg-transparent font-Poppins font-sans h-[80px] shadow-[0_0px_20px_30px_-10px_rgb(38, 57, 77)] w-full absolute z-50 "
+        className="bg-transparent font-Poppins font-sans h-[80px] shadow-[0_0px_20px_30px_-10px_rgb(38, 57, 77)] w-full absolute sm:z-50 md:z-50 lg:z-50"
         style={styleCard}
       >
         <nav
-          className="mx-auto flex max-w-7xl items-center justify-between px-[8.5px] lg:px-8 font-sans text-red-500 w-full mt-[-6.5vw] lg:mt-[-2.5vw]"
+          className="mx-auto flex max-w-7xl items-center justify-between px-[8.5px] lg:px-8 font-sans text-red-500 w-full mt-[-6.5vw] lg:mt-[-2.5vw] "
           aria-label="Global"
           style={styleCard}
         >
@@ -135,7 +135,7 @@ export default function Headers() {
         >
           <div className="fixed inset-0 z-10 bg-black" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-            <div className="flex items-center justify-between mt-[-30px] mb-[-40px]">
+            <div className="flex items-center justify-between sm:mt-[-50px] sm:mb-[-40px] md:mt-[-50px] md:mb-[-40px] bg-black">
               <a href="#" className="-m-1.5 p-1.5">
                 <img
                   className="h-36 w-auto bg-black"
@@ -169,14 +169,6 @@ export default function Headers() {
                       </>
                     )}
                   </Disclosure>
-                  <Link
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-50"
-                    to="/Search"
-                    style={styleCard}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Search
-                  </Link>
 
                   <Link
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-50"
@@ -185,15 +177,6 @@ export default function Headers() {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Tv Shows
-                  </Link>
-
-                  <Link
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-50"
-                    to="/Wishlist"
-                    style={styleCard}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    WatchLater
                   </Link>
                 </div>
 
