@@ -12,7 +12,7 @@ const MoviesDetails = () => {
 
   const watchLaterMovies = useSelector((store) => store.watchLater.item);
   const getInfoFromLocalStorage = useSelector((store) => store.watchLater.item);
-  console.log(getInfoFromLocalStorage);
+  // console.log(getInfoFromLocalStorage);
   const fetchDetail = async () => {
     try {
       const data = await fetch(
@@ -59,7 +59,7 @@ const MoviesDetails = () => {
       dispatch(addWatchToLater(movieDetail));
       toast.success("Movie Added To WatchLater")
     } else {
-      console.log("Movie is already in the watchlist");
+      // console.log("Movie is already in the watchlist");
       toast.error("Movie Already Added")
     }
   };

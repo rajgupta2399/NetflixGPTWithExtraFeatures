@@ -9,9 +9,12 @@ import { auth } from "../Utils/Firebase";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { addUser, removeUser } from "@/store/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import NETFLIXLOGO from "../../assets/NGPT LOGOS.png";
+import { toggleGptSearchView } from "@/store/gptSlice.js";
+import { SUPPORTED_LANGUAGES } from "../Utils/Constant.js";
+import { changeLanguage } from "@/store/configSlice.js";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -22,6 +25,7 @@ export default function Headers() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -58,6 +62,14 @@ export default function Headers() {
     fontSize: "16px",
   };
 
+  const handleGptSearch = () => {
+    dispatch(toggleGptSearchView());
+  };
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
     <>
       <header
@@ -92,37 +104,61 @@ export default function Headers() {
             className="hidden lg:flex lg:gap-x-12"
             style={styleCard}
           >
-            <Popover className="relative">
-              <Popover.Button
-                className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-white font-sans hover:text-red-600 transition ease-in-out delay-100"
-                style={styleCard}
-              >
-                <Link to="/browse">Home</Link>
-              </Popover.Button>
-            </Popover>
-
-            <Link
-              to="/TvShows"
-              className="text-sm font-semibold leading-6 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer"
-              style={styleCard}
-            >
-              TV Shows
-            </Link>
-            <Link
-              to="/Wishlist"
-              className="text-sm font-semibold leading-6 text-white hover:text-red-600 transition ease-in delay-100 cursor-pointer"
-              style={styleCard}
-            >
-              WatchLater
-            </Link>
-            <Link
-              to="/Search"
-              className="text-sm font-semibold leading-6 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer"
-              style={styleCard}
-            >
-              <i className="fa-solid fa-magnifying-glass px-2"></i>
-              Search
-            </Link>
+            {showGptSearch ? (
+              <>
+                {showGptSearch && (
+                  
+                  <select
+                    className=" bg-transparent outline-none"
+                    onChange={handleLanguageChange}
+                  >
+                    {SUPPORTED_LANGUAGES.map((lang) => (
+                      <option
+                        key={lang.identifier}
+                        value={lang.identifier}
+                        className="bg-transparent outline-none"
+                      >
+                        {lang.name}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </>
+            ) : (
+              <>
+                <Popover className="relative">
+                  <Popover.Button
+                    className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-white font-sans hover:text-red-600 transition ease-in-out delay-100"
+                    style={styleCard}
+                  >
+                    <Link to="/browse">Home</Link>
+                  </Popover.Button>
+                </Popover>
+                <Link
+                  to="/TvShows"
+                  className="text-sm font-semibold leading-6 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer"
+                  style={styleCard}
+                >
+                  TV Shows
+                </Link>
+                <Link
+                  to="/Wishlist"
+                  className="text-sm font-semibold leading-6 text-white hover:text-red-600 transition ease-in delay-100 cursor-pointer"
+                  style={styleCard}
+                >
+                  WatchLater
+                </Link>
+                <Link
+                  to="/Search"
+                  className="text-sm font-semibold leading-6 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer"
+                  style={styleCard}
+                  onClick={handleGptSearch}
+                >
+                  <i className="fa-solid fa-magnifying-glass px-2"></i>
+                  GPTSearch
+                </Link>
+              </>
+            )}
           </Popover.Group>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end bg-transparent blur-0">
             <Profile />

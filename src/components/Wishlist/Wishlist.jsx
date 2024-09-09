@@ -9,7 +9,7 @@ const Wishlist = () => {
   const dispatch = useDispatch();
   const movies = useSelector((store) => store.watchLater.item);
   const handlerRemoveWatchLater = (item) => {
-    console.log(item);
+    // console.log(item);
     dispatch(removeWatchLater(item.id));
   };
   return movies.length === 0 ? (
